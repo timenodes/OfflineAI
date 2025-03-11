@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="ChatAI" Height="800" Width="1000"
-        Icon="/Views/Resources/app-logo-128.ico"
+        Icon="/Resources/Images/app-logo-128.ico"
         MinHeight="600" MinWidth="800">
     <!--绑定上下文-->
     <Window.DataContext>
@@ -23,8 +23,8 @@
             
             <!--资源字典: 添加控件样式-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Views/Styles/ButtonStyle.xaml"/>
-                <ResourceDictionary Source="Views/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -83,7 +83,7 @@
                          Command="{Binding ExpandedMenuCommand}"
                          CommandParameter="expanded">
                     <StackPanel>
-                        <Image Source="Views/Resources/expended-bar-black-64.png"
+                        <Image Source="Resources/Images/expended-bar-black-64.png"
                           Margin="5" Width="32" Height="32"
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -94,7 +94,7 @@
                    Command="{Binding SwitchViewCommand}"
                    CommandParameter="UserChatView">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Views/Resources/home-black-24.png"
+                        <Image Source="Resources/Images/home-black-24.png"
                              Margin="5" Width="24" Height="24"
                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -105,7 +105,7 @@
                           Command="{Binding SwitchViewCommand}"
                           CommandParameter="NewUserChatView">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Views/Resources/edit-black-24.png"
+                        <Image Source="Resources/Images/edit-black-24.png"
                                 Margin="5" Width="24" Height="24"
                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock  Text="新聊天" VerticalAlignment="Center"/>
@@ -128,7 +128,7 @@
                         Command="{Binding SwitchViewCommand}"
                         CommandParameter="SystemSettingView">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                        <Image Source="/Views/Resources/setting-64.png" 
+                        <Image Source="/Resources/Images/setting-64.png" 
                             Width="24" Height="24"
                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>

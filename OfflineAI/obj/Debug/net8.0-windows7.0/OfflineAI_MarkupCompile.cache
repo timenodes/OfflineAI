@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Code\CSharpeDemo\AI\OfflineAI\OfflineAI-v1.3-20250310\obj\Debug\net8.0-windows7.0\
+E:\Github\Repos\timenodes\OfflineAI\OfflineAI\obj\Debug\net8.0-windows7.0\
 OfflineAI
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-E:\Code\CSharpeDemo\AI\OfflineAI\OfflineAI-v1.3-20250310\App.xaml
-9-1316644782
+E:\Github\Repos\timenodes\OfflineAI\OfflineAI\App.xaml
+9-1209551798
 
 32-1399205577
 216-243713925
-MainWindow.xaml;Views\ChatRecordListView.xaml;Views\Styles\BorderStyle.xaml;Views\Styles\ButtonStyle.xaml;Views\Styles\ComboBoxStyle.xaml;Views\Styles\MarkDownViewerStyle.xaml;Views\SystemSettingView.xaml;Views\UserChatView.xaml;Views\UserViews\ExternalDataPreView.xaml;
+MainWindow.xaml;Resources\Styles\BorderStyle.xaml;Resources\Styles\ButtonStyle.xaml;Resources\Styles\ComboBoxStyle.xaml;Resources\Styles\MarkDownViewerStyle.xaml;Views\ChatRecordListView.xaml;Views\SystemSettingView.xaml;Views\UserChatView.xaml;Views\UserViews\ExternalDataPreView.xaml;
 
 False
 

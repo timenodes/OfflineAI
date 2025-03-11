@@ -30,7 +30,7 @@ namespace OfflineAI.ViewModels
         
         public ExternalDataPreViewModel()
         {
-            Model.ImageSource = "/Views/Resources/text-file-blue-64.png";
+            Model.ImageSource = "/Resources/Images/text-file-blue-64.png";
         }
 
         /// <summary>
@@ -41,13 +41,13 @@ namespace OfflineAI.ViewModels
             switch (fileType)
             {
                 case ExternalDataType.Text:
-                    Model.ImageSource = "/Views/Resources/text-file-blue-64.png";
+                    Model.ImageSource = "/Resources/Images/text-file-blue-64.png";
                     break;
                 case ExternalDataType.Image:
-                    Model.ImageSource = "/Views/Resources/image-file-blue-64.png";
+                    Model.ImageSource = "/Resources/Images/image-file-blue-64.png";
                     break;
                 default:
-                    Model.ImageSource = "/Views/Resources/unknown-red-64.png";
+                    Model.ImageSource = "/Resources/Images/unknown-red-64.png";
                     break;
             }
 

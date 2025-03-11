@@ -19,8 +19,8 @@
         <ResourceDictionary>
             <!--资源字典: 添加控件样式-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Views/Styles/MarkDownViewerStyle.xaml"/>
-                <ResourceDictionary Source="../Views/Styles/BorderStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/MarkDownViewerStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/BorderStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -110,10 +110,10 @@
                                 <Style.Triggers>
                                     <!-- 如果 RunState 为 true，显示绿色图像 -->
                                     <DataTrigger Binding="{Binding ChatModel.RunState}" Value="False">
-                                        <Setter Property="Source" Value="../Views/Resources/ollama-run-state-red-32.png" />
+                                        <Setter Property="Source" Value="../Resources/Images/ollama-run-state-red-32.png" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ChatModel.RunState}" Value="True">
-                                        <Setter Property="Source" Value="../Views/Resources/ollama-run-state-green-32.png" />
+                                        <Setter Property="Source" Value="../Resources/Images/ollama-run-state-green-32.png" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -229,7 +229,7 @@
                     <!--选择添加文件按钮-->
                     <Button Width="50" Command="{Binding SelecteAddFileCommand}">
                         <Image Width="24" Height="24" x:Name="FileIco"
-                            Source="/Views/Resources/append-black-24.png" 
+                            Source="../Resources/Images/append-black-24.png" 
                             HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         <!-- 定义ToolTip -->
                         <Button.ToolTip>

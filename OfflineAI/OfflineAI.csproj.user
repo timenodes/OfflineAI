@@ -27,16 +27,16 @@
     <Page Update="Views\ChatRecordListView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Styles\BorderStyle.xaml">
+    <Page Update="Resources\Styles\BorderStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Styles\ButtonStyle.xaml">
+    <Page Update="Resources\Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Styles\ComboBoxStyle.xaml">
+    <Page Update="Resources\Styles\ComboBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Styles\MarkDownViewerStyle.xaml">
+    <Page Update="Resources\Styles\MarkDownViewerStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SystemSettingView.xaml">

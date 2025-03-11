@@ -438,11 +438,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\OfflineAI.csproj",
+      "projectUniqueName": "E:\\Github\\Repos\\timenodes\\OfflineAI\\OfflineAI\\OfflineAI.csproj",
       "projectName": "OfflineAI",
-      "projectPath": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\OfflineAI.csproj",
+      "projectPath": "E:\\Github\\Repos\\timenodes\\OfflineAI\\OfflineAI\\OfflineAI.csproj",
       "packagesPath": "C:\\Users\\Who\\.nuget\\packages\\",
-      "outputPath": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\obj\\",
+      "outputPath": "E:\\Github\\Repos\\timenodes\\OfflineAI\\OfflineAI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

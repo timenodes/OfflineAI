@@ -6,39 +6,39 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Views\Resources\app-logo-128.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Images\app-logo-128.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\Resources\app-logo-128.ico" />
-    <None Remove="Views\Resources\append-black-24.png" />
-    <None Remove="Views\Resources\chat-64.png" />
-    <None Remove="Views\Resources\edit-black-24.png" />
-    <None Remove="Views\Resources\expended-bar-black-64.png" />
-    <None Remove="Views\Resources\expended-bar-white-64.png" />
-    <None Remove="Views\Resources\home-black-24.png" />
-    <None Remove="Views\Resources\image-file-blue-64.png" />
-    <None Remove="Views\Resources\ollama-run-state-green-32.png" />
-    <None Remove="Views\Resources\ollama-run-state-red-32.png" />
-    <None Remove="Views\Resources\setting-64.png" />
-    <None Remove="Views\Resources\submit-blue-64.png" />
-    <None Remove="Views\Resources\text-file-blue-64.png" />
-    <None Remove="Views\Resources\unknown-red-64.png" />
+    <None Remove="Resources\app-logo-128.ico" />
+    <None Remove="Resources\append-black-24.png" />
+    <None Remove="Resources\chat-64.png" />
+    <None Remove="Resources\edit-black-24.png" />
+    <None Remove="Resources\expended-bar-black-64.png" />
+    <None Remove="Resources\expended-bar-white-64.png" />
+    <None Remove="Resources\home-black-24.png" />
+    <None Remove="Resources\image-file-blue-64.png" />
+    <None Remove="Resources\ollama-run-state-green-32.png" />
+    <None Remove="Resources\ollama-run-state-red-32.png" />
+    <None Remove="Resources\setting-64.png" />
+    <None Remove="Resources\submit-blue-64.png" />
+    <None Remove="Resources\text-file-blue-64.png" />
+    <None Remove="Resources\unknown-red-64.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\Resources\expended-bar-black-64.png" />
-    <Resource Include="Views\Resources\expended-bar-white-64.png" />
-    <Resource Include="Views\Resources\image-file-blue-64.png" />
-    <Resource Include="Views\Resources\ollama-run-state-red-32.png" />
-    <Resource Include="Views\Resources\ollama-run-state-green-32.png" />
-    <Resource Include="Views\Resources\submit-blue-64.png" />
+    <Resource Include="Resources\Images\expended-bar-black-64.png" />
+    <Resource Include="Resources\Images\expended-bar-white-64.png" />
+    <Resource Include="Resources\Images\image-file-blue-64.png" />
+    <Resource Include="Resources\Images\ollama-run-state-red-32.png" />
+    <Resource Include="Resources\Images\ollama-run-state-green-32.png" />
+    <Resource Include="Resources\Images\submit-blue-64.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\Resources\append-black-24.png" />
-    <Resource Include="Views\Resources\edit-black-24.png" />
-    <Resource Include="Views\Resources\home-black-24.png" />
+    <Resource Include="Resources\Images\append-black-24.png" />
+    <Resource Include="Resources\Images\edit-black-24.png" />
+    <Resource Include="Resources\Images\home-black-24.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,11 +51,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\Resources\app-logo-128.ico" />
-    <Resource Include="Views\Resources\chat-64.png" />
-    <Resource Include="Views\Resources\setting-64.png" />
-    <Resource Include="Views\Resources\text-file-blue-64.png" />
-    <Resource Include="Views\Resources\unknown-red-64.png" />
+    <Resource Include="Resources\Images\app-logo-128.ico" />
+    <Resource Include="Resources\Images\chat-64.png" />
+    <Resource Include="Resources\Images\setting-64.png" />
+    <Resource Include="Resources\Images\text-file-blue-64.png" />
+    <Resource Include="Resources\Images\unknown-red-64.png" />
   </ItemGroup>
 
 </Project>
