@@ -1,0 +1,134 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|e:\\code\\csharpedemo\\ai\\offlineai\\offlineai-v1.3-20250310\\viewmodels\\externaldatapreviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|solutionrelative:viewmodels\\externaldatapreviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|e:\\code\\csharpedemo\\ai\\offlineai\\offlineai-v1.3-20250310\\viewmodels\\chatrecordlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|solutionrelative:viewmodels\\chatrecordlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|e:\\code\\csharpedemo\\ai\\offlineai\\offlineai-v1.3-20250310\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|solutionrelative:viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|e:\\code\\csharpedemo\\ai\\offlineai\\offlineai-v1.3-20250310\\viewmodels\\userchatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|solutionrelative:viewmodels\\userchatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|e:\\code\\csharpedemo\\ai\\offlineai\\offlineai-v1.3-20250310\\views\\userchatview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|solutionrelative:views\\userchatview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ExternalDataPreViewModel.cs",
+              "DocumentMoniker": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\ExternalDataPreViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ExternalDataPreViewModel.cs",
+              "ToolTip": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\ExternalDataPreViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ExternalDataPreViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwsAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T08:03:44.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatRecordListViewModel.cs",
+              "DocumentMoniker": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\ChatRecordListViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ChatRecordListViewModel.cs",
+              "ToolTip": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\ChatRecordListViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ChatRecordListViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T08:02:17.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
+              "ToolTip": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T08:01:56.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserChatViewModel.cs",
+              "DocumentMoniker": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\UserChatViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\UserChatViewModel.cs",
+              "ToolTip": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\ViewModels\\UserChatViewModel.cs",
+              "RelativeToolTip": "ViewModels\\UserChatViewModel.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACQAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T07:28:45.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserChatView.xaml",
+              "DocumentMoniker": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\Views\\UserChatView.xaml",
+              "RelativeDocumentMoniker": "Views\\UserChatView.xaml",
+              "ToolTip": "E:\\Code\\CSharpeDemo\\AI\\OfflineAI\\OfflineAI-v1.3-20250310\\Views\\UserChatView.xaml",
+              "RelativeToolTip": "Views\\UserChatView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T07:14:27.561Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

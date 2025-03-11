@@ -1,0 +1,275 @@
+﻿<UserControl x:Class="OfflineAI.Views.UserChatView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:OfflineAI.Views"
+             xmlns:markdig ="clr-namespace:Markdig.Wpf;assembly=Markdig.Wpf"
+             xmlns:viewmodels="clr-namespace:OfflineAI.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <!--绑定数据上下文-->
+    <UserControl.DataContext>
+        <viewmodels:UserChatViewModel  x:Name="ViewModel"/>
+    </UserControl.DataContext>
+    <!--控件资源-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!--资源字典: 添加控件样式-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Views/Styles/MarkDownViewerStyle.xaml"/>
+                <ResourceDictionary Source="../Views/Styles/BorderStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <!--命令绑定事件：窗体加载时传参数Markdown控件对象。在Grid中创建，否则会出现null异常-->
+        <behavior:Interaction.Triggers>
+            <behavior:EventTrigger EventName="Loaded">
+                <behavior:InvokeCommandAction 
+                  Command="{Binding MarkdownOBJCommand}"
+                  CommandParameter="{Binding ElementName=MarkdownContent}"/>
+            </behavior:EventTrigger>
+        </behavior:Interaction.Triggers>
+        <!--定义行-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="250"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--行背景色-->
+        <Border Grid.Row="0" Background="#FFFFFF"/>
+        <Border Grid.Row="1" Background="#EEEEEE"/>
+        <Border Grid.Row="2" Background="#EEEEEE"/>
+        <Grid Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--markdown 滑动条-->
+            <ScrollViewer Background="#EEEEEE"
+                          x:Name="MarkDownScrollViewer">
+                <!--加载事件命令-->
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="Loaded">
+                        <behavior:InvokeCommandAction 
+                         Command="{Binding ScrollLoadedCommand}"
+                         PassEventArgsToCommand="True"/>
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>
+                <!--markdown 控件-->
+                <markdig:MarkdownViewer
+                        Name="MarkdownContent">
+                    <markdig:MarkdownViewer.Resources>
+                        <!-- 应用自定义样式 -->
+                        <Style TargetType="Paragraph" BasedOn="{StaticResource Heading1Style}" />
+                        <Style TargetType="Hyperlink" BasedOn="{StaticResource LinkStyle}" />
+                    </markdig:MarkdownViewer.Resources>
+                    <!--命令绑定事件：鼠标滚动显示内容-->
+                    <behavior:Interaction.Triggers>
+                        <!--鼠标滚动命令事件-->
+                        <behavior:EventTrigger EventName="PreviewMouseWheel">
+                            <behavior:InvokeCommandAction 
+                             Command="{Binding MouseWheelCommand}"
+                             PassEventArgsToCommand="True"/>
+                        </behavior:EventTrigger>
+                        <!--鼠标点击命令事件-->
+                        <behavior:EventTrigger EventName="PreviewMouseDown">
+                            <behavior:InvokeCommandAction 
+                             Command="{Binding MouseDownCommand}"
+                             PassEventArgsToCommand="True"/>
+                        </behavior:EventTrigger>
+                    </behavior:Interaction.Triggers>
+                </markdig:MarkdownViewer>
+            </ScrollViewer>
+            
+            <!-- Ollama 运行状态显示 -->
+            <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18"
+                       IsHitTestVisible="False">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <!-- 默认显示运行状态 -->
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <!-- 如果 ChatModel.显示状态为True，显示运行状态 -->
+                            <DataTrigger Binding="{Binding ChatModel.IsShowRunState}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ChatModel.IsShowRunState}" Value="False">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                <WrapPanel>
+                    <Image Width="24" Height="24"  Margin="0,0,5,0"  
+                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Style.Triggers>
+                                    <!-- 如果 RunState 为 true，显示绿色图像 -->
+                                    <DataTrigger Binding="{Binding ChatModel.RunState}" Value="False">
+                                        <Setter Property="Source" Value="../Views/Resources/ollama-run-state-red-32.png" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ChatModel.RunState}" Value="True">
+                                        <Setter Property="Source" Value="../Views/Resources/ollama-run-state-green-32.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Background="Transparent" BorderThickness="0">
+                     <TextBox.Style>
+                         <Style TargetType="TextBox">
+                             <Style.Triggers>
+                                 <!-- 如果 RunState 为 true，显示绿色图像 -->
+                                 <DataTrigger Binding="{Binding ChatModel.RunState}" Value="False">
+                                     <Setter Property="Text" Value="Ollama停止运行" />
+                                 </DataTrigger>
+                                 <DataTrigger Binding="{Binding ChatModel.RunState}" Value="True">
+                                     <Setter Property="Text" Value="Ollama正在运行" />
+                                 </DataTrigger>
+                             </Style.Triggers>
+                         </Style>
+                     </TextBox.Style>
+                </TextBox>
+                </WrapPanel>
+            </TextBlock>
+        </Grid>
+        <!--第2行内容：显示回话内容-->
+        <Grid Grid.Row="1"  Margin="2" Background="#FFFFFF">
+            <!--定义三行-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--第1行Border样式:-->
+            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderStyle}"/>
+            <!--第2行Border样式:-->
+            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}"/>
+            <!--第3行Border样式:-->
+            <Border Grid.Row="2" Grid.Column="1" 
+                    Background="#AAAAAA"
+                    BorderThickness="1 0 1 1"
+                    BorderBrush ="#000000" />
+            
+            <!--第1行内容区域:外部数据预览面板-->
+            <Grid Grid.Row="0" Grid.Column="1"  Background="#FFFFFF">
+                <WrapPanel Name="FileShowArea" Margin="0,0,0,0" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Top">
+                    <behavior:Interaction.Triggers>
+                        <behavior:EventTrigger EventName="Loaded">
+                            <behavior:InvokeCommandAction 
+                              Command="{Binding ExternalDataPanelLoadedCommand}"
+                              PassEventArgsToCommand="True"/>
+                        </behavior:EventTrigger>
+                    </behavior:Interaction.Triggers>
+                </WrapPanel>
+            </Grid>
+            
+            <!--第2行内容区域：文本输入框-->
+            <Grid Grid.Row="1" Grid.Column="1">
+                <TextBox Padding="5" 
+                         FontSize="14"
+                         BorderThickness="1,1,1,0"
+                         BorderBrush ="#000000"
+                         AcceptsReturn="True" 
+                         Background="#666666"  
+                         Foreground="#EEEEEE"
+                         TextWrapping="WrapWithOverflow"
+                         Text="{Binding ChatModel.InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalScrollBarVisibility="Auto">
+                    <!--回车发送-->
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding SubmitQuestionCommand}" Key="Enter"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <!-- 提示文本 -->
+                <TextBlock Text="给AI发送消息"
+                       Foreground="#999999"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Margin="10,5,0,0"
+                       FontSize="14"
+                       IsHitTestVisible="False">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <!-- 默认隐藏提示文本 -->
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <!-- 如果 ChatModel.InputText 为空，显示提示文本 -->
+                                <DataTrigger Binding="{Binding ChatModel.InputText}" Value="">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChatModel.InputText}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            
+            <!--第3行内容区域:文件选择，提交按钮-->
+            <Grid Grid.Row="2" Grid.Column="1">
+                <WrapPanel  Margin="0,0,5,0" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center">
+                    <!--选择添加文件按钮-->
+                    <Button Width="50" Command="{Binding SelecteAddFileCommand}">
+                        <Image Width="24" Height="24" x:Name="FileIco"
+                            Source="/Views/Resources/append-black-24.png" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <!-- 定义ToolTip -->
+                        <Button.ToolTip>
+                            <ToolTip Content="添加文件" Placement="Top"  HorizontalOffset="0" VerticalOffset="0">
+                                <ToolTip.Triggers>
+                                    <!-- 设置ToolTip显示延迟1秒 -->
+                                    <EventTrigger RoutedEvent="ToolTip.Opened">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ToolTip.Triggers>
+                            </ToolTip>
+                        </Button.ToolTip>
+                        <!-- 设置ToolTip的显示和隐藏 -->
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="ToolTipService.ShowDuration" Value="10000"/>
+                                <!-- ToolTip显示持续时间 -->
+                                <Setter Property="ToolTipService.InitialShowDelay" Value="1000"/>
+                                <!-- 延迟1秒显示 -->
+                                <Setter Property="ToolTipService.BetweenShowDelay" Value="0"/>
+                                <!-- 防止快速显示 -->
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
+                    <!--问题提交按钮-->
+                    <Button Width="50"  Margin="5 0 0 0"  
+                            Command="{Binding SubmitQuestionCommand}" 
+                            Content="{Binding ChatModel.SubmitButtonName}">
+                    </Button>
+                </WrapPanel>
+            </Grid>
+        </Grid>
+        
+        <!--第3行内容：-->
+        <Grid Grid.Row="2">
+        </Grid>
+    </Grid>
+</UserControl>

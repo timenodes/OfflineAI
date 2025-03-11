@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Views\Resources\app-logo-128.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Resources\app-logo-128.ico" />
+    <None Remove="Views\Resources\append-black-24.png" />
+    <None Remove="Views\Resources\chat-64.png" />
+    <None Remove="Views\Resources\edit-black-24.png" />
+    <None Remove="Views\Resources\expended-bar-black-64.png" />
+    <None Remove="Views\Resources\expended-bar-white-64.png" />
+    <None Remove="Views\Resources\home-black-24.png" />
+    <None Remove="Views\Resources\image-file-blue-64.png" />
+    <None Remove="Views\Resources\ollama-run-state-green-32.png" />
+    <None Remove="Views\Resources\ollama-run-state-red-32.png" />
+    <None Remove="Views\Resources\setting-64.png" />
+    <None Remove="Views\Resources\submit-blue-64.png" />
+    <None Remove="Views\Resources\text-file-blue-64.png" />
+    <None Remove="Views\Resources\unknown-red-64.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Resources\expended-bar-black-64.png" />
+    <Resource Include="Views\Resources\expended-bar-white-64.png" />
+    <Resource Include="Views\Resources\image-file-blue-64.png" />
+    <Resource Include="Views\Resources\ollama-run-state-red-32.png" />
+    <Resource Include="Views\Resources\ollama-run-state-green-32.png" />
+    <Resource Include="Views\Resources\submit-blue-64.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Resources\append-black-24.png" />
+    <Resource Include="Views\Resources\edit-black-24.png" />
+    <Resource Include="Views\Resources\home-black-24.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
+    <PackageReference Include="Markdig.Wpf" Version="0.5.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="OllamaSharp" Version="5.0.7" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Resources\app-logo-128.ico" />
+    <Resource Include="Views\Resources\chat-64.png" />
+    <Resource Include="Views\Resources\setting-64.png" />
+    <Resource Include="Views\Resources\text-file-blue-64.png" />
+    <Resource Include="Views\Resources\unknown-red-64.png" />
+  </ItemGroup>
+
+</Project>

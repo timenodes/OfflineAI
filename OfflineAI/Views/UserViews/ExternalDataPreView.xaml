@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="OfflineAI.Views.UserViews.ExternalDataPreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OfflineAI.Views.UserViews"
+              xmlns:viewmodels="clr-namespace:OfflineAI.ViewModels"
+             mc:Ignorable="d"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+    <!--绑定数据上下文-->
+    <UserControl.DataContext>
+        <viewmodels:ExternalDataPreViewModel  x:Name="ViewModel"/>
+    </UserControl.DataContext>
+    <Grid Background="Transparent" >
+        <!--外部数据卡片，
+            1、显示加载的外部数据文件名
+            2、隐藏显示文件路径
+            3、点击按钮可以删除
+        -->
+        <Border Background="Transparent"/>
+        <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1" Background="#AAAABB">
+            <Image x:Name="ImgFileIco" Width="20" Height="20" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Source="{Binding Model.ImageSource}" >
+            </Image>
+            <TextBox x:Name="Tbx_Text"  
+              Text="External Data"
+              IsReadOnly="True"
+              Background="#AAAABB"
+              HorizontalContentAlignment="Left"
+              VerticalContentAlignment="Center"
+              TextWrapping="Wrap"/>
+            <Button x:Name="RemoveButton" 
+                    Tag="{Binding Model.Index}"
+                    Background="#AAAABB" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center" 
+                    Content=" × ">
+            </Button>
+        </WrapPanel>
+        
+    </Grid>
+</UserControl>

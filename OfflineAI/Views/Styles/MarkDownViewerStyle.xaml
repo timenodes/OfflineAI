@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 自定义标题样式 -->
+    <Style x:Key="Heading1Style" TargetType="Paragraph">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#0078d7" />
+        <Setter Property="Margin" Value="0 10 0 5" />
+    </Style>
+    
+    
+    <!-- 自定义普通文本样式 -->
+    <Style x:Key="TextStyle" TargetType="FlowDocument">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="#333333" />
+    </Style>
+
+    <!-- 自定义链接样式 -->
+    <Style x:Key="LinkStyle" TargetType="Hyperlink">
+        <Setter Property="Foreground" Value="#00BBCC" />
+        <Setter Property="FontFamily" Value="宋体"/>
+        <Setter Property="TextDecorations" Value="Underline" />
+    </Style>
+</ResourceDictionary>
