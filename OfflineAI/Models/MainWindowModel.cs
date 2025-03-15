@@ -81,14 +81,7 @@ namespace OfflineAI.Models
         public OllamaService Ollama
         {
             get => _ollamaService;
-            set
-            {
-                if (_ollamaService != value)
-                {
-                    _ollamaService = value;
-                    OnPropertyChanged();
-                }
-            }
+            set => _ollamaService = value;
         }
         
         /// <summary>

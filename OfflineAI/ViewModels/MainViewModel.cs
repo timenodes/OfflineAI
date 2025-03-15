@@ -27,8 +27,8 @@ namespace OfflineAI.ViewModels
     /// 版本version: 1.1
     ///     1、2025-03-01：优化了类结构，创建对应的Model(MainWindowModel),将所有字段、属性移到Model。
     ///     2、2025-03-01：新增聊天记录窗体，修改了窗体加载时，加载聊天记录的功能。将其移动到了ChatRecordListView，在其视图模型中实现。
-    ///     2、2025-03-10：移除了折叠栏功能，更新为Grid区域的显示与隐藏
-    ///     
+    ///     3、2025-03-10：移除了折叠栏功能，更新为Grid区域的显示与隐藏
+    ///     4、2025-03-14：新增基础配置加载功能。
     /// </summary>
     public class MainViewModel : PropertyChangedBase
     {
@@ -74,19 +74,19 @@ namespace OfflineAI.ViewModels
         /// <summary>
         /// 折叠功能菜单命令
         /// </summary>
-        public ICommand ExpandedMenuCommand { get; set; }
+        public ICommand ExpandedMenuCommand { get; private set; }
         /// <summary>
         /// 切换视图命令
         /// </summary>
-        public ICommand SwitchViewCommand { get; set; }
+        public ICommand SwitchViewCommand { get; private set; }
         /// <summary>
         /// 窗体关闭命令
         /// </summary>
-        public ICommand ClosingWindowCommand {  get; set; }
+        public ICommand ClosingWindowCommand {  get; private set; }
         /// <summary>
         /// 窗体加载命令
         /// </summary>
-        public ICommand LoadedWindowCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; private set; }
        
         #endregion
 
@@ -137,8 +137,12 @@ namespace OfflineAI.ViewModels
         private void OnLoadedWindow(object obj)
         {
             Debug.Print(obj?.ToString());
+            var systemView = GetUserControl<SystemSettingView>();
+            systemView.ViewModel.Model.Ollama = MainModel.Ollama;
+            systemView.ViewModel.LoadData();
+            MainModel.SelectedModel = systemView.ViewModel.Model.Ollama.SelectModel;
             var userView = GetUserControl<UserChatView>();
-            userView.ViewModel.ChatModel.Ollama = MainModel.Ollama;
+            userView.ViewModel.Model.Ollama = MainModel.Ollama;
         }
        
         /// <summary>
@@ -154,6 +158,7 @@ namespace OfflineAI.ViewModels
                 }
                 else
                 {
+                    GetUserControl<SystemSettingView>().ViewModel.SaveConfigCommand.Execute(null);
                     ClearResources();
                 }
             }
@@ -225,7 +230,7 @@ namespace OfflineAI.ViewModels
             GetChatRecordView.ViewModel.RegisterCallBack(newChatView.ViewModel.LoadChatRecordCallback);
             //创建新的Chat对象并初始化数据
             MainModel.Ollama.CreateNewChat();
-            newChatView.ViewModel.ChatModel.Ollama = MainModel.Ollama;
+            newChatView.ViewModel.Model.Ollama = MainModel.Ollama;
             MainModel.ViewCollection[1] = null;
             MainModel.ViewCollection[1] = newChatView;
             MainModel.CurrentView = newChatView;

@@ -19,12 +19,11 @@
         <ResourceDictionary>
             <!--资源字典: 添加控件样式-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Styles/MarkDownViewerStyle.xaml"/>
-                <ResourceDictionary Source="/Resources/Styles/BorderStyle.xaml"/>
+                <ResourceDictionary Source="../Resources/Styles/MarkDownViewerStyle.xaml"/>
+                <ResourceDictionary Source="../Resources/Styles/BorderStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-
     <Grid>
         <!--命令绑定事件：窗体加载时传参数Markdown控件对象。在Grid中创建，否则会出现null异常-->
         <behavior:Interaction.Triggers>
@@ -43,10 +42,12 @@
         <!--行背景色-->
         <Border Grid.Row="0" Background="#FFFFFF"/>
         <Border Grid.Row="1" Background="#EEEEEE"/>
-        <Border Grid.Row="2" Background="#EEEEEE"/>
-        <Grid Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border Grid.Row="2" Background="#EEEEEE" BorderThickness="0" BorderBrush="Transparent"/>
+        <Grid Grid.Row="0" Height="Auto" 
+              HorizontalAlignment="Stretch" 
+              VerticalAlignment="Stretch">
             <!--markdown 滑动条-->
-            <ScrollViewer Background="#EEEEEE"
+            <ScrollViewer Background="#FFFFFF"
                           x:Name="MarkDownScrollViewer">
                 <!--加载事件命令-->
                 <behavior:Interaction.Triggers>
@@ -81,7 +82,7 @@
                     </behavior:Interaction.Triggers>
                 </markdig:MarkdownViewer>
             </ScrollViewer>
-            
+
             <!-- Ollama 运行状态显示 -->
             <TextBlock VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -93,10 +94,10 @@
                         <Setter Property="Visibility" Value="Visible" />
                         <Style.Triggers>
                             <!-- 如果 ChatModel.显示状态为True，显示运行状态 -->
-                            <DataTrigger Binding="{Binding ChatModel.IsShowRunState}" Value="True">
+                            <DataTrigger Binding="{Binding Model.IsShowRunState}" Value="True">
                                 <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ChatModel.IsShowRunState}" Value="False">
+                            <DataTrigger Binding="{Binding Model.IsShowRunState}" Value="False">
                                 <Setter Property="Visibility" Value="Hidden" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -109,10 +110,10 @@
                             <Style TargetType="Image">
                                 <Style.Triggers>
                                     <!-- 如果 RunState 为 true，显示绿色图像 -->
-                                    <DataTrigger Binding="{Binding ChatModel.RunState}" Value="False">
+                                    <DataTrigger Binding="{Binding Model.RunState}" Value="False">
                                         <Setter Property="Source" Value="../Resources/Images/ollama-run-state-red-32.png" />
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding ChatModel.RunState}" Value="True">
+                                    <DataTrigger Binding="{Binding Model.RunState}" Value="True">
                                         <Setter Property="Source" Value="../Resources/Images/ollama-run-state-green-32.png" />
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -125,10 +126,10 @@
                          <Style TargetType="TextBox">
                              <Style.Triggers>
                                  <!-- 如果 RunState 为 true，显示绿色图像 -->
-                                 <DataTrigger Binding="{Binding ChatModel.RunState}" Value="False">
+                                 <DataTrigger Binding="{Binding Model.RunState}" Value="False">
                                      <Setter Property="Text" Value="Ollama停止运行" />
                                  </DataTrigger>
-                                 <DataTrigger Binding="{Binding ChatModel.RunState}" Value="True">
+                                 <DataTrigger Binding="{Binding Model.RunState}" Value="True">
                                      <Setter Property="Text" Value="Ollama正在运行" />
                                  </DataTrigger>
                              </Style.Triggers>
@@ -153,15 +154,15 @@
             </Grid.ColumnDefinitions>
 
             <!--第1行Border样式:-->
-            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderStyle}"/>
+            <Border Grid.Row="0" Grid.Column="1" BorderThickness="0" Style="{StaticResource BorderStyle}"/>
             <!--第2行Border样式:-->
             <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}"/>
             <!--第3行Border样式:-->
             <Border Grid.Row="2" Grid.Column="1" 
-                    Background="#AAAAAA"
+                    Background="#EEEEEE"
                     BorderThickness="1 0 1 1"
                     BorderBrush ="#000000" />
-            
+
             <!--第1行内容区域:外部数据预览面板-->
             <Grid Grid.Row="0" Grid.Column="1"  Background="#FFFFFF">
                 <WrapPanel Name="FileShowArea" Margin="0,0,0,0" 
@@ -176,7 +177,7 @@
                     </behavior:Interaction.Triggers>
                 </WrapPanel>
             </Grid>
-            
+
             <!--第2行内容区域：文本输入框-->
             <Grid Grid.Row="1" Grid.Column="1">
                 <TextBox Padding="5" 
@@ -184,10 +185,10 @@
                          BorderThickness="1,1,1,0"
                          BorderBrush ="#000000"
                          AcceptsReturn="True" 
-                         Background="#666666"  
-                         Foreground="#EEEEEE"
+                         Background="#EEEEEE"  
+                         Foreground="#000000"
                          TextWrapping="WrapWithOverflow"
-                         Text="{Binding ChatModel.InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding Model.InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalScrollBarVisibility="Auto">
                     <!--回车发送-->
                     <TextBox.InputBindings>
@@ -197,7 +198,7 @@
 
                 <!-- 提示文本 -->
                 <TextBlock Text="给AI发送消息"
-                       Foreground="#999999"
+                       Foreground="#555555"
                        VerticalAlignment="Top"
                        HorizontalAlignment="Left"
                        Margin="10,5,0,0"
@@ -209,10 +210,10 @@
                             <Setter Property="Visibility" Value="Collapsed" />
                             <Style.Triggers>
                                 <!-- 如果 ChatModel.InputText 为空，显示提示文本 -->
-                                <DataTrigger Binding="{Binding ChatModel.InputText}" Value="">
+                                <DataTrigger Binding="{Binding Model.InputText}" Value="">
                                     <Setter Property="Visibility" Value="Visible" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding ChatModel.InputText}" Value="{x:Null}">
+                                <DataTrigger Binding="{Binding Model.InputText}" Value="{x:Null}">
                                     <Setter Property="Visibility" Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
@@ -220,14 +221,14 @@
                     </TextBlock.Style>
                 </TextBlock>
             </Grid>
-            
+
             <!--第3行内容区域:文件选择，提交按钮-->
             <Grid Grid.Row="2" Grid.Column="1">
                 <WrapPanel  Margin="0,0,5,0" 
                             HorizontalAlignment="Right" 
                             VerticalAlignment="Center">
                     <!--选择添加文件按钮-->
-                    <Button Width="50" Command="{Binding SelecteAddFileCommand}">
+                    <Button Width="50" Command="{Binding SelecteAddFileCommand}" BorderThickness="0" Background="Transparent">
                         <Image Width="24" Height="24" x:Name="FileIco"
                             Source="../Resources/Images/append-black-24.png" 
                             HorizontalAlignment="Right" VerticalAlignment="Center"/>
@@ -258,16 +259,16 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    
+
                     <!--问题提交按钮-->
-                    <Button Width="50"  Margin="5 0 0 0"  
+                    <Button Width="50"  Margin="5 0 0 0" BorderThickness="0"   Background="Transparent"
                             Command="{Binding SubmitQuestionCommand}" 
-                            Content="{Binding ChatModel.SubmitButtonName}">
+                            Content="{Binding Model.SubmitButtonName}">
                     </Button>
                 </WrapPanel>
             </Grid>
         </Grid>
-        
+
         <!--第3行内容：-->
         <Grid Grid.Row="2">
         </Grid>

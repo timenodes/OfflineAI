@@ -24,6 +24,9 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\Styles\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ChatRecordListView.xaml">
       <SubType>Designer</SubType>
     </Page>

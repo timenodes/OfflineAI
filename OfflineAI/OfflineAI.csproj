@@ -18,6 +18,8 @@
     <None Remove="Resources\expended-bar-white-64.png" />
     <None Remove="Resources\home-black-24.png" />
     <None Remove="Resources\image-file-blue-64.png" />
+    <None Remove="Resources\Images\search-black-32.png" />
+    <None Remove="Resources\Images\search-blue-32.png" />
     <None Remove="Resources\ollama-run-state-green-32.png" />
     <None Remove="Resources\ollama-run-state-red-32.png" />
     <None Remove="Resources\setting-64.png" />
@@ -32,6 +34,8 @@
     <Resource Include="Resources\Images\image-file-blue-64.png" />
     <Resource Include="Resources\Images\ollama-run-state-red-32.png" />
     <Resource Include="Resources\Images\ollama-run-state-green-32.png" />
+    <Resource Include="Resources\Images\search-black-32.png" />
+    <Resource Include="Resources\Images\search-blue-32.png" />
     <Resource Include="Resources\Images\submit-blue-64.png" />
   </ItemGroup>
 

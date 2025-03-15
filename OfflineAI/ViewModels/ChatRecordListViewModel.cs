@@ -61,7 +61,7 @@ namespace OfflineAI.ViewModels
         /// <summary>
         /// 聊天记录鼠标点击事件
         /// </summary>
-        public ICommand ChatRecordMouseDownCommand { get; set; }
+        public ICommand ChatRecordMouseDownCommand { get; private set; }
         #endregion
 
         #endregion
@@ -148,8 +148,8 @@ namespace OfflineAI.ViewModels
                 if (datas != null && datas[0].Content.Trim().Length > 0)
                 {
                     ChatDataModel dataModel = new ChatDataModel();
-                    dataModel.JsonModel = datas[0];     //Json数据
-                    dataModel.Uri = file;               //加载链接           
+                    dataModel.JsonModel = datas[0];     
+                    dataModel.Uri = file;        
                     dataModel.MenuItemMouseDownCommand = new RelayCommand(OnMenuItemMouseDown);
                     records.Add(dataModel);
                     Debug.WriteLine(datas[0].Content);

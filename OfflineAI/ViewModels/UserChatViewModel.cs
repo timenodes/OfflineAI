@@ -50,7 +50,7 @@ namespace OfflineAI.ViewModels
         private ConcurrentQueue<string> _messageQueue;              //消息异步线程：消息队列
         //自定义
         private DataService _userDataService;                       //聊天数据服务
-        private UserChatModel _chatModel = new UserChatModel();     //用户聊天模型
+        private UserChatModel _model = new UserChatModel();     //用户聊天模型
         
         #endregion
 
@@ -67,14 +67,14 @@ namespace OfflineAI.ViewModels
         /// <summary>
         /// 用户聊天模型
         /// </summary>
-        public UserChatModel ChatModel
+        public UserChatModel Model
         { 
-            get => _chatModel;
+            get => _model;
             set
             {
-                if (_chatModel != value)
+                if (_model != value)
                 {
-                    _chatModel = value;
+                    _model = value;
                     OnPropertyChanged();
                 }
             }
@@ -86,36 +86,36 @@ namespace OfflineAI.ViewModels
         /// <summary>
         /// 展开功能菜单命令
         /// </summary>
-        public ICommand SelecteAddFileCommand { get; set; }
+        public ICommand SelecteAddFileCommand { get; private set; }
 
         /// <summary>
         /// 提交命令
         /// </summary>
-        public ICommand SubmitQuestionCommand { get; set; }
+        public ICommand SubmitQuestionCommand { get; private set; }
 
         /// <summary>
         /// 鼠标滚动
         /// </summary>
-        public ICommand MouseWheelCommand { get; set; }
+        public ICommand MouseWheelCommand { get; private set; }
 
         /// <summary>
         /// 鼠标按下
         /// </summary>
-        public ICommand MouseDownCommand { get; set; }
+        public ICommand MouseDownCommand { get; private set; }
 
         /// <summary>
         /// Markdown对象命令
         /// </summary>
-        public ICommand MarkdownOBJCommand { get; set; }
+        public ICommand MarkdownOBJCommand { get; private set; }
         
         /// <summary>
         /// 滑动条加载
         /// </summary>
-        public ICommand ScrollLoadedCommand { get; set; }
+        public ICommand ScrollLoadedCommand { get; private set; }
         /// <summary>
         /// 外部数据面板加载
         /// </summary>
-        public ICommand ExternalDataPanelLoadedCommand { get; set; }
+        public ICommand ExternalDataPanelLoadedCommand { get; private set; }
         #endregion
 
         #endregion
@@ -142,12 +142,12 @@ namespace OfflineAI.ViewModels
             ScrollLoadedCommand = new EventsCommand<RoutedEventArgs>(OnScrollLoaded);
             ExternalDataPanelLoadedCommand = new EventsCommand<RoutedEventArgs>(OnExternalDataPanelLoaded);
             //按钮名称
-            ChatModel.SubmitButtonName = "提交";
+            Model.SubmitButtonName = "提交";
 
             //聊天记录
-            ChatModel.Directory = $"{AppDomain.CurrentDomain.BaseDirectory}\\Record\\";
-            UserDataService = new DataService($"{ChatModel.Directory}");
-            ChatModel.FileName = UserDataService.FileModel.FileNameDT;
+            Model.Directory = $"{AppDomain.CurrentDomain.BaseDirectory}\\Record\\";
+            UserDataService = new DataService($"{Model.Directory}");
+            Model.FileName = UserDataService.FileModel.FileNameDT;
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace OfflineAI.ViewModels
         private async void OnSubmitQuestion()
         {
             _ = Task.Delay(1);
-            string input = ChatModel.InputText;
+            string input = Model.InputText;
             ChatDataModel chatData = new ChatDataModel();
             chatData.JsonModel.Role = "User";         
             chatData.JsonModel.Content = input;
@@ -222,13 +222,13 @@ namespace OfflineAI.ViewModels
                 if (!SubmintChecked(input))
                 {
                     //直接回答完成：设置输入框为空，不自动滚动，按钮名称，按钮使能
-                    ChatModel.IsAutoScrolling = false;
+                    Model.IsAutoScrolling = false;
                     OnStopCurrentChat();
-                    ChatModel.SubmitButtonName = "提交";
+                    Model.SubmitButtonName = "提交";
                     return;
                 }
-                ChatModel.SubmitButtonName = "停止";
-                ChatModel.IsAutoScrolling = true;
+                Model.SubmitButtonName = "停止";
+                Model.IsAutoScrolling = true;
                 AppendText($"##{Environment.NewLine}");
                 AppendText($"### [{chatData.JsonModel.Date}]{Environment.NewLine}");
                 AppendText($"# 【User】{Environment.NewLine}");
@@ -238,18 +238,19 @@ namespace OfflineAI.ViewModels
                 scrollViewer.ScrollToEnd();
                 IEnumerable<string> imageBase64 = null;
                 int index = 1;
+                
                 //加载文本|图像文件数据
                 foreach (var data in UserDataService.ExternalDatas)
                 {
                     //加载图像数据
                     if (data.Model.DataType == ExternalDataType.Image)
                     {
-                        OllamaSharp.Models.Chat.Message externalMessage = new OllamaSharp.Models.Chat.Message();
                         imageBase64 = ConvertImageToBase64IEnumerable(data.Model.FileName);
+                        Message externalMessage = new Message();
                         externalMessage.Role = ChatRole.User;
-                        externalMessage.Content = $"这是第{index++}张图像，如果用户问到，那么可能是这张！";
+                        externalMessage.Content = $"这是图像信息，如果用户有提到，可能是这些图像";
                         externalMessage.Images = imageBase64.ToArray();
-                        ChatModel.Ollama.Chat.Messages.Add(externalMessage);
+                        Model.Ollama.Chat.Messages.Add(externalMessage);
                         string ImageUri = "![Local Image](file:///" + data.Model.FileName.Replace("\\", "/") + ")";
                         appendText += $"{ImageUri}{Environment.NewLine}{Environment.NewLine}";
                         AppendText($"{ImageUri}{Environment.NewLine}{Environment.NewLine}");
@@ -257,10 +258,10 @@ namespace OfflineAI.ViewModels
                     //加载文本数据
                     if (data.Model.DataType == ExternalDataType.Text)
                     {
-                        OllamaSharp.Models.Chat.Message externalMessage = new OllamaSharp.Models.Chat.Message();
-                        externalMessage.Content = $"$\"文件名{{Path.GetFileName(data.FileName)}},以下是这一份文件内容:如果用户有问到文件，可能是这些内容：\\n{File.ReadAllText(data.Model.FileName)}";
-                        externalMessage.Role = ChatRole.User;
-                        ChatModel.Ollama.Chat.Messages.Add(externalMessage);
+                        Message externalFileMessage = new Message();
+                        externalFileMessage.Content = $"文件名{Path.GetFileName(data.Model.FileName)},以下是这一份文件内容:如果用户有问到文件，可能是这些内容：\\n{File.ReadAllText(data.Model.FileName)}";
+                        externalFileMessage.Role = ChatRole.User;
+                        Model.Ollama.Chat.Messages.Add(externalFileMessage);
                     }
                 }
                 AppendText($"## 【AI】{Environment.NewLine}");
@@ -269,7 +270,7 @@ namespace OfflineAI.ViewModels
                 _cts_ChatThread = new CancellationTokenSource();
                 _cts_MessageQueue = new CancellationTokenSource();
                 _messageQueue = new ConcurrentQueue<string>();
-                await foreach (var answerToken in ChatModel.Ollama.Chat.SendAsync(input, imageBase64, _cts_ChatThread.Token))
+                await foreach (var answerToken in Model.Ollama.Chat.SendAsync(input, imageBase64, _cts_ChatThread.Token))
                 {
                     if (answerToken.Equals("\n") || answerToken.Equals("\r\n"))
                     {
@@ -278,7 +279,7 @@ namespace OfflineAI.ViewModels
                     appendText += answerToken;
                     AppendText(answerToken);
                     await Task.Delay(20);
-                    if (ChatModel.IsAutoScrolling) scrollViewer.ScrollToEnd();//是否自动滚动
+                    if (Model.IsAutoScrolling) scrollViewer.ScrollToEnd();//是否自动滚动
                 }
                 AppendText($"{Environment.NewLine}{Environment.NewLine}");
                 chatData.JsonModel.Result = appendText;
@@ -286,6 +287,7 @@ namespace OfflineAI.ViewModels
                 chatData.Uri = UserDataService.FileModel.FileNameDT;
                 DataService.AppendDataToJsonFile(chatData);
 
+                AppendText($"---{Environment.NewLine}");
                 //提交回答完后清空外部数据
                 wrapPanel.Children.Clear(); 
                 UserDataService.ClearExternalData();
@@ -296,9 +298,9 @@ namespace OfflineAI.ViewModels
                 AppendText($"{Environment.NewLine}{Environment.NewLine}");
             }
             //回答完成：设置输入框为空，不自动滚动，按钮名称
-            ChatModel.InputText = string.Empty;
-            ChatModel.IsAutoScrolling = false;
-            ChatModel.SubmitButtonName = "提交";
+            Model.InputText = string.Empty;
+            Model.IsAutoScrolling = false;
+            Model.SubmitButtonName = "提交";
         }
 
         /// <summary>
@@ -349,7 +351,7 @@ namespace OfflineAI.ViewModels
         {
             if (args.LeftButton == MouseButtonState.Pressed)
             {
-                ChatModel.IsAutoScrolling = false;
+                Model.IsAutoScrolling = false;
                 Debug.Print("Mouse Down...");
             }
         }
@@ -388,7 +390,7 @@ namespace OfflineAI.ViewModels
         public void AppendText(string newText)
         {
             Debug.Print(newText);
-            ChatModel.IsShowRunState = false;
+            Model.IsShowRunState = false;
             _markdownViewer.Markdown += newText;
         }
 
@@ -399,7 +401,7 @@ namespace OfflineAI.ViewModels
         {
             if (string.IsNullOrEmpty(input)) return false;
             if (input.Trim().Length<2) return false;
-            if (ChatModel.SubmitButtonName.Equals("停止")) return false;
+            if (Model.SubmitButtonName.Equals("停止")) return false;
             return true;
         }
 
@@ -414,7 +416,6 @@ namespace OfflineAI.ViewModels
             // 遍历语法树并输出结果
             StringBuilder output = new StringBuilder();
             TraverseMarkdown(document, output);
-
             // 显示结果
             ChatJsonDataModel chatJsonDataModel = new ChatJsonDataModel();
             chatJsonDataModel.Result = output.ToString();
@@ -448,7 +449,6 @@ namespace OfflineAI.ViewModels
         /// </summary>
         private void ConvertMarkdownOut(string text)
         {
-            // .UseCustomRenderers()   // 使用自定义渲染器
             var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
             // 应用样式
             _markdownViewer.Pipeline = pipeline;
@@ -476,7 +476,7 @@ namespace OfflineAI.ViewModels
             return new OllamaSharp.Models.Chat.Message()
             {
                 Content = content,
-                Role = role
+                Role = new ChatRole(role)
             };
         }
         #endregion
@@ -582,8 +582,8 @@ namespace OfflineAI.ViewModels
             Debug.Print(path);
             List<ChatJsonDataModel> datas = DataService.ReadDataFormJsonFile(path);
             StringBuilder appendText = new StringBuilder();
-            //切换聊天记录时，清空Chat对象中的消息，避免重复加载。
-            ChatModel.Ollama.Chat.Messages.Clear();        
+            //切换聊天记录时，清空Chat对象中的消息。
+            Model.Ollama.Chat.Messages.Clear();        
             foreach (ChatJsonDataModel data in datas)
             {
                 //文本追加、添加到Markdown控件中
@@ -594,10 +594,9 @@ namespace OfflineAI.ViewModels
                 appendText.AppendLine($"## 【AI】{Environment.NewLine}");
                 appendText.AppendLine($"{data.Result}{Environment.NewLine}");
                 appendText.AppendLine($"{Environment.NewLine}");
-
                 //创建并添加消息到Chat中
-                ChatModel.Ollama.Chat.Messages.Add(GenerateMessage(data.Content));
-                ChatModel.Ollama.Chat.Messages.Add(GenerateMessage(data.Result, "system"));
+                Model.Ollama.Chat.Messages.Add(GenerateMessage(data.Content));
+                Model.Ollama.Chat.Messages.Add(GenerateMessage(data.Result, "assistant"));
             }
             //设置当前路径为该文件路径，方便提问时将内容续写到该文件中
             UserDataService.FileModel.FileNameDT = path;  
@@ -605,7 +604,6 @@ namespace OfflineAI.ViewModels
             ConvertMarkdownOut(appendText.ToString());
             scrollViewer.ScrollToTop();    //滚动到顶部
         }
-
         
         #endregion
     }

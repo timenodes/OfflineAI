@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Github\\Repos\\timenodes\\OfflineAI\\OfflineAI\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|e:\\github\\repos\\timenodes\\offlineai\\offlineai\\views\\systemsettingview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E8E648A1-CFEF-4670-90E5-742DD0772569}|OfflineAI.csproj|solutionrelative:views\\systemsettingview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,6 +43,26 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SystemSettingView.xaml",
+              "DocumentMoniker": "E:\\Github\\Repos\\timenodes\\OfflineAI\\OfflineAI\\Views\\SystemSettingView.xaml",
+              "RelativeDocumentMoniker": "Views\\SystemSettingView.xaml",
+              "ToolTip": "E:\\Github\\Repos\\timenodes\\OfflineAI\\OfflineAI\\Views\\SystemSettingView.xaml",
+              "RelativeToolTip": "Views\\SystemSettingView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-15T02:48:04.474Z",
+              "EditorCaption": ""
             }
           ]
         },

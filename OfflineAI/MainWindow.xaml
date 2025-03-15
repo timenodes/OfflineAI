@@ -15,12 +15,9 @@
     <Window.DataContext>
         <viewmodels:MainViewModel/>
     </Window.DataContext>
-
     <!--样式资源-->
     <Window.Resources>
-        
         <ResourceDictionary>
-            
             <!--资源字典: 添加控件样式-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Styles/ButtonStyle.xaml"/>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 E:\Github\Repos\timenodes\OfflineAI\OfflineAI\App.xaml
-9-1209551798
+10-2085092794
 
-341516884942
+36864621402
 216-243713925
-MainWindow.xaml;Resources\Styles\BorderStyle.xaml;Resources\Styles\ButtonStyle.xaml;Resources\Styles\ComboBoxStyle.xaml;Resources\Styles\MarkDownViewerStyle.xaml;Views\ChatRecordListView.xaml;Views\SystemSettingView.xaml;Views\UserChatView.xaml;Views\UserViews\ExternalDataPreView.xaml;
+MainWindow.xaml;Resources\Styles\BorderStyle.xaml;Resources\Styles\ButtonStyle.xaml;Resources\Styles\ComboBoxStyle.xaml;Resources\Styles\MarkDownViewerStyle.xaml;Resources\Styles\TextBoxStyle.xaml;Views\ChatRecordListView.xaml;Views\SystemSettingView.xaml;Views\UserChatView.xaml;Views\UserViews\ExternalDataPreView.xaml;
 
-False
+True
 

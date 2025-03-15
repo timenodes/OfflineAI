@@ -39,19 +39,19 @@ namespace OfflineAI.Services
         /// </summary>
         public static bool ExecuteCommandAsAdmin(string command)
         {
-            // 创建一个新的进程启动信息
             ProcessStartInfo processStartInfo = new ProcessStartInfo
             {
-                FileName = "cmd.exe",           // 设置要启动的程序为cmd.exe
-                Arguments = $"/C {command}",    // 设置要执行的命令
-                Verb = "runas",                 // 以管理员身份运行
-                UseShellExecute = true,         // 使用操作系统shell启动进程
+                FileName = "cmd.exe",          
+                Arguments = $"/C {command}",    
+                Verb = "runas",   
+                UseShellExecute = true,        
                 CreateNoWindow = false,
             };
             try
             {
-                Process process = Process.Start(processStartInfo);// 启动进程
-                process.Close();          // 返回是否成功执行
+                Process process = Process.Start(processStartInfo);
+                process.WaitForExit();
+                process.Close();
                 return process.ExitCode == 0;
             }
             catch (Exception ex)
@@ -62,38 +62,39 @@ namespace OfflineAI.Services
         }
 
         /// <summary>
-        /// 执行CMD指令
+        /// 执行CMD指令:不创建窗体启用Shell执行指定命令
         /// </summary>
         public static bool ExecuteCommand(string command)
         {
-            // 创建一个新的进程启动信息
             ProcessStartInfo processStartInfo = new ProcessStartInfo
             {
-                FileName = "cmd.exe",           // 设置要启动的程序为cmd.exe
-                Arguments = $"/C {command}",    // 设置要执行的命令
-                UseShellExecute = true,         // 使用操作系统shell启动进程
-                CreateNoWindow = false,         //不创建窗体
+                FileName = "cmd.exe",
+                Arguments = $"/C {command}",
+                UseShellExecute = true,        
+                CreateNoWindow = false,         
             };
             try
             {
-                Process process = Process.Start(processStartInfo);// 启动进程
-                process.WaitForExit();    // 等待进程退出
-                process.Close();          // 返回是否成功执行
+                Process process = Process.Start(processStartInfo);
+                process.WaitForExit();   
+                process.Close();
                 return process.ExitCode == 0;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"发生错误: {ex.Message}");// 其他异常处理
+                Debug.WriteLine($"发生错误: {ex.Message}");
                 return false;
             }
         }
 
         /// <summary>
-        /// 根据端口获取进程PID并释放与此有关的所有资源
+        /// 通过端口号关闭进程（管理员参数：Verb = "runas"）：
+        ///     1、通过netstat命令获取端口占用的进程ID
+        ///     2、使用taskkill命令终止进程
         /// </summary>
-        public static void GetPIDAndCloseByPort(int port)
+        public static void CloseProcessByPort(int port)
         {
-            int pid = GetProcessIDByPort(port);
+            int pid = GetPidByPort(port);
             try
             {
                 if (pid != -1)
@@ -101,12 +102,12 @@ namespace OfflineAI.Services
                     var processStartInfo = new ProcessStartInfo()
                     {
                         FileName = "cmd.exe",
-                        Arguments = $"/c taskkill /PID {pid} /F", // 使用taskkill命令关闭指定PID的进程
-                        //Verb = "runas",                           // 以管理员权限运行
-                        UseShellExecute = true,                   // 使用shell执行
-                        CreateNoWindow = true                     // 不创建新窗口
+                        Arguments = $"/c taskkill /PID {pid} /F",
+                        UseShellExecute = true,
+                        CreateNoWindow = true
                     };
                     Process process = Process.Start(processStartInfo);
+                    process.WaitForExit();
                     process.Close();
                     process.WaitForExit(2000);
                     Debug.WriteLine($"成功终止了进程ID为 {pid} 的进程.");
@@ -137,7 +138,7 @@ namespace OfflineAI.Services
         /// <summary>
         /// 根据端口获取PID
         /// </summary>
-        public static int GetProcessIDByPort(int port)
+        public static int GetPidByPort(int port)
         {
             try
             {
@@ -147,10 +148,8 @@ namespace OfflineAI.Services
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
-
                 string output = process.StandardOutput.ReadToEnd();
                 process.WaitForExit(1000);
-                //剔除"\r\n"组合，剔除连续"\r\n"避免为空
                 string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string line in lines)
                 {

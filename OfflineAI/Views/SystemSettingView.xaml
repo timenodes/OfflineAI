@@ -8,13 +8,47 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Grid>
-        <StackPanel Background="#FFFFFF" Margin="5">
-            <TextBox FontSize="36" IsReadOnly="True"
-                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center">系统设置</TextBox>
-            <CheckBox Width="200" Margin="5" HorizontalAlignment="Left" IsChecked="True">是否滚动显示</CheckBox>
-            <ComboBox Width="200" Margin="5" HorizontalAlignment="Left">
-            </ComboBox>
-        </StackPanel>
+    <UserControl.DataContext>
+        <viewModels:SystemSettingViewModel x:Name="ViewModel"/>
+    </UserControl.DataContext>
+    <!--控件资源-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!--资源字典: 添加控件样式-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Styles/TextBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid Background="#FFFFFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBox x:Name="txt_Name" FontSize="32" Text="系统设置" IsReadOnly="True"
+                 BorderThickness="0" Background="#AAAAAA"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        </Grid>
+        <Grid Grid.Row="1" Margin="10">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Label Content="聊天记录:" FontSize="16"
+                           HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <TextBox x:Name="txt_SelectedBox" Width="500"
+                         Style="{StaticResource SelectedBox}"
+                         Text="{Binding Model.DataPath}">
+                    </TextBox>
+                </WrapPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+                <Button Content="保存" Width="100" Height="30" Margin="5"
+                        Command="{Binding SaveConfigCommand}"/>
+            </WrapPanel>
+        </Grid>
     </Grid>
 </UserControl>
